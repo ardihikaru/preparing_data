@@ -1,0 +1,23 @@
+## 0.1.0 (十二月 24, 2019)
+  - updated .gitignore and added bump-version.sh for easier versioning
+  - Update README.md
+  - revised some codes, rewritten README file
+  - revised some codes, rewritten README file
+  - Update README.md
+  - added gen_pairs_lfw.py file
+  - uploaded new script insightface_pairs_gen_v1.py
+  - Edited train_valid_test.py to train_test.py which generates only test data out of collected set
+  - Edited train_valid_test.py
+  - Added script to divide data into train, valid, test
+  - Merge branch 'master' of https://github.com/Talgin/preparing_data Adding alignment script.
+  - Added alignment script
+  - Update README.md
+  - Update README.md
+  - Update README.md
+  - Update README.md
+  - new scripts for data preparation were added
+  - Update README.md
+  - Create README.md
+  - Changed generate_pairs.py to insightface_pairs_gen.py and updated this module to really generate pairs from the data in our dataset folder
+  - Changed generate_pairs.py to insightface_pairs_gen.py and updated this module to really generate pairs from the data in our dataset folder
+
