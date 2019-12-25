@@ -9,9 +9,12 @@
 
 # Ignore Important Folders
 resources/
+our_dataset_copy/
+Aidana_Medenova/
 
 # Ignore Python 3 Environment
 penv/
+venv/
 migrations/
 __pycache__/
 

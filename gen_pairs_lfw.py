@@ -47,8 +47,12 @@ class GeneratePairs:
                 for i in range(3):
                     temp = random.choice(a).split("_") # This line may vary depending on how your images are named.
                     w = temp[0] + "_" + temp[1]
-                    l = random.choice(a).split("_")[2].lstrip("0").rstrip(self.img_ext)
-                    r = random.choice(a).split("_")[2].lstrip("0").rstrip(self.img_ext)
+                    try: # work with image with more than 1 filename, e.g. "Muhammad_Febrian"
+                        l = random.choice(a).split("_")[2].lstrip("0").rstrip(self.img_ext)
+                        r = random.choice(a).split("_")[2].lstrip("0").rstrip(self.img_ext)
+                    except: # specially only for single person name, e.g. "Ardiansyah"
+                        l = random.choice(a).lstrip("0").rstrip(self.img_ext)
+                        r = random.choice(a).lstrip("0").rstrip(self.img_ext)
                     f.write(w + "\t" + l + "\t" + r + "\n")
 
 
@@ -70,8 +74,15 @@ class GeneratePairs:
                     # print('first', file1, name)
                     file2 = random.choice(os.listdir(self.data_dir + other_dir))
                     # print('second', file2, other_dir)
-                    number_1 = file1.split("_")[2].lstrip("0").rstrip(self.img_ext)
-                    number_2 = file2.split("_")[2].lstrip("0").rstrip(self.img_ext)
+
+                    try: # work with image with more than 1 filename, e.g. "Muhammad_Febrian"
+                        number_1 = file1.split("_")[2].lstrip("0").rstrip(self.img_ext)
+                        number_2 = file2.split("_")[2].lstrip("0").rstrip(self.img_ext)
+                    except: # specially only for single person name, e.g. "Ardiansyah"
+                        number_1 = file1.lstrip("0").rstrip(self.img_ext)
+                        number_2 = file2.lstrip("0").rstrip(self.img_ext)
+
+
                     # print(number_1, number_2)
                     # f.write(name + "\t" + file1.split("_")[2].lstrip("0").rstrip(self.img_ext) + "\n")
                     f.write(name + "\t" + number_1 + "\t" + other_dir + "\t" + number_2 + '\n')
@@ -83,10 +94,13 @@ if __name__ == '__main__':
     parser.add_argument('--txt-file', default='', help='Full path to the directory with peeople and their names, folder should denote the Name_Surname of the person')
     # reading the passed arguments
     args = parser.parse_args()
-    data_dir = args.data_dir    # "out_data_crop/"
-    pairs_filepath = args.txt_file         # "pairs_1.txt"
-    
-    img_ext = ".jpg"
+    # data_dir = args.data_dir    # "out_data_crop/"
+    data_dir = "our_dataset_copy/"
+    # pairs_filepath = args.txt_file         # "pairs_1.txt"
+    pairs_filepath = "pairs.txt" # pair ourput
+
+    # img_ext = ".jpg"
+    img_ext = ".png"
     generatePairs = GeneratePairs(data_dir, pairs_filepath, img_ext)
     generatePairs.generate()
 
