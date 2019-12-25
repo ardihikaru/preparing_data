@@ -10,6 +10,7 @@
 # Ignore Important Folders
 resources/
 our_dataset_copy/
+our_dataset_lagi/
 Aidana_Medenova/
 
 # Ignore Python 3 Environment

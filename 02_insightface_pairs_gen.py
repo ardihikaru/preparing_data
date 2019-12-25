@@ -18,7 +18,15 @@ class PairGenerator:
         for i in range(20):
             left = random.choice(lst)
             right = random.choice(lst)
-            f.write(left + ' ' + right + ' 1\n')
+            # f.write(left + ' ' + right + ' 1\n')
+
+            # Ardi: Modification to fit example: pairs-sample.txt
+            label = left.split('/')[0]
+            # left_img_id = (left.split(".")[0]).split("/")[1]
+            # right_img_id = (right.split(".")[0]).split("/")[1]
+            left_img_id = int(((left.split(".")[0]).split("/")[1]).split("_")[1])
+            right_img_id = int(((right.split(".")[0]).split("/")[1]).split("_")[1])
+            f.write(label + ' ' + str(left_img_id) + ' ' + str(right_img_id) + '\n')
 
     def write_different(self, lst1, lst2):
         f = open(self.pairs_filepath, 'a+')
@@ -37,6 +45,11 @@ class PairGenerator:
     #     f.close()
 
     def generate_pairs(self):
+        # Initial phase: put the common information
+        f = open(self.pairs_filepath, 'a+')
+        f.write("25 2323\n")
+        f.close()
+
         for name in os.listdir(self.data_dir):
             if name == ".DS_Store":
                 continue
@@ -63,7 +76,8 @@ class PairGenerator:
                     continue
                 file_path = name + '/' + file
                 # file_int = file.split('.')[0]
-                dataset_dir = "mlsp_dataset_int/faces112x112" # folder naming used in the future
+                dataset_dir = "faces112x112" # folder naming used in the future
+                # dataset_dir = "mlsp_dataset_int/faces112x112" # folder naming used in the future
                 f.write("1" + '\t' + dataset_dir+file_path + '\t' + str(label) + '\n')
                 # f.write("1" + '\t' + file_path + '\t' + str(label) + '\n')
                 # f.write("1" + ' ' + file_path + ' ' + str(label) + '\n')
@@ -107,12 +121,13 @@ class PairGenerator:
 
 
 if __name__ == '__main__':
-    data_dir = "our_dataset_copy/"
-    pairs_filepath = "pairs.lst" # output of new pair
+    data_dir = "our_dataset_lagi/"
+    pairs_filepath = "pairs.txt" # output of new pair
+    # pairs_filepath = "pairs.lst" # output of new pair
     # pairs_filepath = "pairs_ardi.txt" # output of new pair
     # img_ext = ".png"
     img_ext = ".jpg"
     generatePairs = PairGenerator(data_dir, pairs_filepath, img_ext)
-    generatePairs.generate_lst() # to use, please uncomment this line
-    # generatePairs.generate_pairs() # to use, please uncomment this line
+    # generatePairs.generate_lst() # to use, please uncomment this line
+    generatePairs.generate_pairs() # to use, please uncomment this line
     # generatePairs.generate_non_pairs() # to use, please uncomment this line
